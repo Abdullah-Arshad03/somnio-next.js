@@ -1,30 +1,46 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { updateCart } from "@/app/util/updateCart";
-import { itemI } from "@/app/util/updateCart";
+"use client";
 
-const initialState = localStorage.getItem("cart")
-  ? JSON.parse(localStorage.getItem("cart") || "")
-  : { cartItems: [] };
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+import { updateCart } from "@/app/util/updateCart";
+import { cartItem } from "@/app/util/cartItem";
+export interface CartState {
+  cartItems: cartItem[];
+  itemsPrice: number;
+}
+const getInitialState = (): CartState => {
+  if (typeof window !== "undefined" && window.localStorage) {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      return JSON.parse(savedCart);
+    }
+  }
+  return {
+    cartItems: [],
+    itemsPrice: 0,
+  };
+};
+
+const initialState: CartState = getInitialState();
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: initialState,
+  initialState,
   reducers: {
-    addToCart: (state, action) => {
+    addToCart: (state, action: PayloadAction<cartItem>) => {
       const item = action.payload;
-      const existItem = state.cartItems.find((x: itemI) => x.id === item.id);
+      const existItem = state.cartItems.find((x) => x.id === item.id);
 
       if (existItem) {
-        state.cartItems = state.cartItems.map((x: itemI) =>
-          x.id === existItem.id ? { ...item, qty: x.qty++ } : x
-        );
+        existItem.qty += 1;
       } else {
-        state.cartItems = [...state.cartItems, item];
+        state.cartItems.push(item);
       }
 
-      return updateCart(state);
+      updateCart(state); // Update the cart in localStorage
     },
   },
 });
 
-export { cartSlice };
+export const { addToCart } = cartSlice.actions;
+export default cartSlice.reducer;
