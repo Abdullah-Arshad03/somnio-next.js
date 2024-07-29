@@ -3,6 +3,7 @@ import React, { useState, lazy, Suspense } from "react";
 import ProductCard from "./components/ProductCard/ProductCard";
 import { IProducts } from "./util/Product";
 import { useGetProductsQuery } from "./redux/slices/productApiSlice";
+import { IoEye } from "react-icons/io5";
 
 const Navbar = lazy(() => import("./components/Navbar/Navbar"));
 
@@ -50,9 +51,12 @@ const HomePage = () => {
         <div className="flex justify-center mt-7">
           <button
             onClick={handleSeeMore}
-            className="px-6 py-2 bg-gray-200 text-black rounded"
+            className="px-28 flex items-center gap-3 justify-center py-4 bg-gray-200 text-black rounded-xl font-bold cursor-pointer text-center"
           >
-            SEE MORE
+            <span>
+              <IoEye size={22} />
+            </span>
+            VER MAS
           </button>
         </div>
       )}
