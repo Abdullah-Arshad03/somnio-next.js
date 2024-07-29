@@ -9,21 +9,27 @@ import { RootState } from "@/app/redux/store";
 import { cartItem } from "@/app/util/cartItem";
 
 interface NavbarProps {
-  searchTerm: string;
-  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  searchTerm?: string;
+  setSearchTerm?: React.Dispatch<React.SetStateAction<string>>;
+  home: boolean;
 }
-const Navbar = ({ searchTerm, setSearchTerm }: NavbarProps) => {
+const Navbar = ({ searchTerm, setSearchTerm, home }: NavbarProps) => {
   const cart = useSelector((state: RootState) => state.cart);
   console.log("this is the cart", cart);
 
   return (
     <div className="navbar flex justify-between bg-[#bac1df] items-center py-1 px-5">
-      <div className="logo">
-        <Logo />
-      </div>
-      <div className="search-bar">
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      </div>
+      <Link href="/">
+        {" "}
+        <div className="logo">
+          <Logo />
+        </div>
+      </Link>
+      {home && (
+        <div className="search-bar">
+          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        </div>
+      )}
       <div className="cart-icon">
         <Link href="/cart" className="relative">
           <BiSolidCart size={50} color="white" />

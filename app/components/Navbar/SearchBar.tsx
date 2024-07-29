@@ -2,8 +2,8 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 
 interface SearchBarProps {
-  searchTerm: string;
-  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  searchTerm?: string;
+  setSearchTerm?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const SearchBar = ({ searchTerm, setSearchTerm }: SearchBarProps) => {
@@ -14,7 +14,9 @@ const SearchBar = ({ searchTerm, setSearchTerm }: SearchBarProps) => {
         type="text"
         placeholder="Buscar Productos ...."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setSearchTerm(e.target.value)
+        }
       />
       <div className="flex items-center">
         <FaSearch color="gray" size={12} />

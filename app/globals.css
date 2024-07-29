@@ -31,3 +31,27 @@ body {
     text-wrap: balance;
   }
 }
+
+@media (min-width: 413px) {
+  .cart-items {
+    width: 280px;
+  }
+}
+@media (min-width: 358px) {
+  .cart-items {
+    width: 280px;
+  }
+  .main-cart-container {
+    padding-top: 80px;
+  }
+}
+@media (min-width: 911px) {
+  .cart-items {
+    width: 600px;
+  }
+}
+@media (min-width: 767px) {
+  .cart-items {
+    width: 600px;
+  }
+}

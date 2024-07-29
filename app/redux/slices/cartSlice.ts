@@ -37,7 +37,7 @@ const cartSlice = createSlice({
         state.cartItems.push(item);
       }
 
-      updateCart(state); // Update the cart in localStorage
+      updateCart(state);
     },
   },
 });
