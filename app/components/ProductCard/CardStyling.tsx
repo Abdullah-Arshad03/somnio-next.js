@@ -28,8 +28,7 @@ export const AddButton = styled.button`
   top: 8px;
   left: 8px;
   background: #fff;
-  border: none;
-  border-radius: 50%;
+  border: 1px solid black;
   width: 32px; /* Adjust size to match the design */
   height: 32px; /* Adjust size to match the design */
   display: flex;
